@@ -1,7 +1,6 @@
 {
-    "watch": ["services", "app.js", "routes", "config"],
-    "ext": "js,json",
-    "ignore": ["node_modules"],
-    "exec": "node app.js"
-  }
-  
+  "watch": ["src"],
+  "ext": "js,json",
+  "ignore": ["node_modules", "uploads"],
+  "exec": "node src/index.js"
+}

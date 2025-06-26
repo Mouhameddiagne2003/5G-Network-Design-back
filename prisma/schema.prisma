@@ -16,19 +16,38 @@ model User {
   createdAt DateTime @default(now())
 }
 
-model Project {
-  id           Int       @id @default(autoincrement())
-  userId       Int
-  name         String
-  area         Float
-  userDensity  Int
-  frequency    Float
-  bandwidth    Int
-  zoneType     String
-  createdAt    DateTime  @default(now())
-  results      Result[]
-  user         User      @relation(fields: [userId], references: [id])
+enum ZoneType {
+  URBAIN
+  PERI_URBAIN
+  RURAL
 }
+
+enum ServiceType {
+  EMBB     // enhanced Mobile Broadband
+  URLLC    // Ultra-Reliable Low Latency Communication
+  MMTC     // massive Machine-Type Communication
+}
+
+
+model Project {
+  id            Int         @id @default(autoincrement())
+  userId        Int
+  name          String
+  description   String?                           // Champ facultatif
+  area          Float
+  userDensity   Int
+  frequency     Float
+  bandwidth     Int
+  zoneType      ZoneType
+  services      ServiceType[]
+  power         Float       @default(43.0)
+  antennaHeight Float       @default(30.0)
+  userHeight    Float       @default(1.5)
+  createdAt     DateTime    @default(now())
+  results       Result[]
+  user          User        @relation(fields: [userId], references: [id])
+}
+
 
 model Result {
   id               Int      @id @default(autoincrement())
