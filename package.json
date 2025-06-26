@@ -1,0 +1,27 @@
+{
+  "name": "5g-dimensionnement-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.10.1",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pdfkit": "^0.17.1",
+    "prisma": "^6.10.1",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
