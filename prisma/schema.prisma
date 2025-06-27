@@ -30,32 +30,45 @@ enum ServiceType {
 
 
 model Project {
-  id            Int         @id @default(autoincrement())
+  id            Int        @id @default(autoincrement())
   userId        Int
   name          String
-  description   String?                           // Champ facultatif
+  description   String?
   area          Float
   userDensity   Int
   frequency     Float
   bandwidth     Int
   zoneType      ZoneType
   services      ServiceType[]
-  power         Float       @default(43.0)
-  antennaHeight Float       @default(30.0)
+  power         Float       @default(43)
+  antennaHeight Float       @default(30)
   userHeight    Float       @default(1.5)
+  latitude      Float?      // Nouvelle colonne
+  longitude     Float?      // Nouvelle colonne
   createdAt     DateTime    @default(now())
   results       Result[]
   user          User        @relation(fields: [userId], references: [id])
 }
 
 
-model Result {
-  id               Int      @id @default(autoincrement())
-  projectId        Int
-  coverage         Float
-  capacity         Float
-  gnodebCount      Int
-  backhaulCapacity Float
-  report           Json
-  project          Project  @relation(fields: [projectId], references: [id])
+
+enum ResultType {
+  COVERAGE
+  CAPACITY
+  GNODEB
+  BACKHAUL
 }
+
+model Result {
+  id               Int        @id @default(autoincrement())
+  projectId        Int        @unique
+  type             ResultType
+  coverage         Float?
+  capacity         Float?
+  gnodebCount      Int?
+  backhaulCapacity Float?
+  report           Json
+  createdAt        DateTime   @default(now())
+  project          Project    @relation(fields: [projectId], references: [id])
+}
+
