@@ -18,6 +18,15 @@ app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/results", resultRoutes);
+app.use("/api/sites", require("./services/sites/routes"));
+
+
+app.use(cors({
+  origin: ['http://localhost:3000'], // Spécifiez l'origine exacte
+  credentials: true, // Permet les cookies/tokens
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.get("/", (req, res) => {
   res.send("Serveur backend 5G Network Designer opérationnel !");

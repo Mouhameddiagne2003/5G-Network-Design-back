@@ -47,8 +47,13 @@ model Project {
   longitude     Float?      // Nouvelle colonne
   createdAt     DateTime    @default(now())
   results       Result[]
+  sites         Site[]
   user          User        @relation(fields: [userId], references: [id])
 }
+
+
+
+
 
 
 
@@ -61,7 +66,7 @@ enum ResultType {
 
 model Result {
   id               Int        @id @default(autoincrement())
-  projectId        Int        @unique
+  projectId        Int        
   type             ResultType
   coverage         Float?
   capacity         Float?
@@ -70,5 +75,19 @@ model Result {
   report           Json
   createdAt        DateTime   @default(now())
   project          Project    @relation(fields: [projectId], references: [id])
+  @@unique([projectId, type])
 }
 
+model Site {
+  id        Int      @id @default(autoincrement())
+  name      String
+  latitude  Float
+  longitude Float
+  radiusKm  Float
+  projectId Int
+  project   Project  @relation(fields: [projectId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+
+ 

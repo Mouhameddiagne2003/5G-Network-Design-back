@@ -5,10 +5,10 @@ const prisma = require("../../config/prismaClient");
 const { projectValidationRules } = require("./validation");
 
 // 🔸 Créer un projet
-router.post("/", projectValidationRules, async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty())
-    return res.status(400).json({ errors: errors.array() });
+router.post("/", async (req, res) => {
+//   const errors = validationResult(req);
+//   if (!errors.isEmpty())
+//     return res.status(400).json({ errors: errors.array() });
 
   console.log(req.user);
 

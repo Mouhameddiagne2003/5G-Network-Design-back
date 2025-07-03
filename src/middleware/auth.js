@@ -7,7 +7,8 @@ const SECRET_KEY = process.env.JWT_SECRET || "secret_jwt_key";
 // 📌 Vérifier le token JWT et l'utilisateur en base
 const verifyToken = async (req, res, next) => {
   try {
-    const token = req.cookies?.access_token;
+    const token = req.headers.authorization.split(" ")[1];
+    console.log(token);
 
     if (!token) return next(errorHandler(401, "Accès non autorisé"));
 
